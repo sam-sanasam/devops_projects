@@ -37,16 +37,16 @@ $ systemctl start mariadb
 $ systemctl enable mariadb
 $ systemctl status mariadb
 
-After the status "running" confirmation, run the below command as a part of mariadb installation.For ref.  https://mariadb.com/kb/en/mysql_secure_installation/
-$ mysql_secure_installation
-Enter current password for root (enter for none): <hit enter>
-Set root password? [Y/n] <Y>
-  new passward: <enter the password which has set in the DATABASE_PASS variable>
-  reenter the passward:
-Remove anonymous users? [Y/n] <Y>
-Disallow root login remotely? [Y/n] n
-Remove test database and access to it? [Y/n] y
-Reload privilege tables now? [Y/n] y
+After the status "running" confirmation, run the below command as a part of mariadb installation.For ref.  https://mariadb.com/kb/en/mysql_secure_installation/\
+$ mysql_secure_installation\
+Enter current password for root (enter for none): <hit enter>\
+Set root password? [Y/n] <Y>\
+  new passward: <enter the password which has set in the DATABASE_PASS variable>\
+  reenter the passward:\
+Remove anonymous users? [Y/n] <Y>\
+Disallow root login remotely? [Y/n] n\
+Remove test database and access to it? [Y/n] y\
+Reload privilege tables now? [Y/n] y\
   
   
   NOw , All done!!
@@ -66,5 +66,17 @@ Reload privilege tables now? [Y/n] y
 
 The above output shows that we are inside the database.
 
-#### Le
+#### Let's initialize the database 
+clone the git repositoty and go the file "db_backup.sql"
+
+1. Setting up the database name 'accounts'\
+$ mysql -u root -p "$DATABASE_PASS" -e "create database accounts"\
+2. Adding user in the database and give full previlages on  account from app01\
+$  mysql -u root -p "$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'app01' identified by 'admin123' "\
+3. Run the below command to initialized the database
+$ mysql -u root -p "$DATABASE_PASS" accounts < db_backup.sql
+
+
+-----------------End ----------
+
 
